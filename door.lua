@@ -1,56 +1,57 @@
-local accessCode = "12345"
+component = require("component")
+event = require("event")
 
-local component = require("component")
-local gpu = component.gpu
-local event = require("event")
-local ser = require("serialization")
-local term = require("term")
-local computer = component.computer
-local door = component.os_rolldoorcontroller
-keypad1 = component.get("bb0b")
-keypad2 = component.get("d2d2")
+local gate_iter = component.list('os_keypad')
+local keypad1, keypad2 = component.proxy(gate_iter()), component.proxy(gate_iter())
 
-customButtons = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "<", "0", "ok"}
-customButtonColor = {"1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"}
-keypad1.setKey(customButtons, customButtonColor)
-keypad2.setKey(customButtons, customButtonColor)
+local pin = "170902"
+local keypadInput = ""
 
-term.clear()
-print("Security door")
-print("---------------------------------------------------------------------------")
+-- set this to true if you want to run the script as daemon
+local runScriptInBackground = false
 
-local inputStr = ""
-while true do
-  ev, address, button, button_label = event.pull("keypad")
-  if ev then
-    if button_label == "ok" then
-      if inputStr == accessCode then
-	term.write("Access granted\n")
-	inputStr = "Welcome"
-	keypad1.setDisplay(inputStr)
-  keypad2.setDisplay(inputStr)
-	computer.beep()
-	door.toggle()
-	os.sleep(5)
-	door.toggle()
-      else
-	term.write("Access denied\n")
-	inputStr = "ERROR"
-	keypad1.setDisplay(inputStr)
-  keypad2.setDisplay(inputStr)
-	os.sleep(2)
-      end
-      inputStr = ""
-    elseif button_label == "<" then
-      if string.len(inputStr) > 0 then
-	tmpStr = string.sub(inputStr, 1 , string.len(inputStr) -1)
-	inputStr = tmpStr
-      end
-    else
-      inputStr = inputStr .. button_label
+function updateDisplay()
+    local displayString = ""
+    for i=1,#keypadInput do
+        displayString = displayString .. "*"
     end
-    keypad1.setDisplay(inputStr)
-    keypad2.setDisplay(inputStr)
-  end
-  os.sleep(0)
+
+    keypad1.setDisplay(displayString, 7)
+    keypad2.setDisplay(displayString, 7)
 end
+
+function checkPin()
+    if keypadInput == pin then
+        keypad1.setDisplay("granted", 2)
+	keypad2.setDisplay("granted", 2)
+    else
+        keypad1.setDisplay("denied", 4)
+	keypad2.setDisplay("denied", 4)
+    end    
+    keypadInput = ""
+    os.sleep(1)
+end
+
+function keypadEvent(eventName, address, button, button_label)
+    print("button pressed: " .. button_label)
+  
+    if button_label == "*" then
+        -- remove last character from input cache
+        keypadInput = string.sub(keypadInput, 1, -2)
+    elseif button_label == "#" then
+        -- check the pin when the user confirmed the input
+        checkPin()
+    else
+        -- add key to input cache if none of the above action apply
+        keypadInput = keypadInput .. button_label
+    end
+
+    updateDisplay()  
+end
+
+-- listen to keypad events
+event.listen("keypad", keypadEvent)
+
+-- clear keypad display
+keypad1.setDisplay("")
+keypad2.setDisplay("")
