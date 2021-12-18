@@ -9,7 +9,7 @@ Tier 2 Screen
 ]]--
  
 local AdminList = {
-"ShicKla",
+"ShicKla","TheRedCreations",
 }
  
 local component = require("component")
@@ -19,6 +19,10 @@ local term = require("term")
 local computer = require("computer")
 local gpu = component.gpu
 local screen = component.screen
+local addr1 = component.get("b35e")  -- the address of the first screen
+local addr2 = component.get("677c")  -- the address of the second screen
+local addr3 = component.get("fc6b")  -- the address of the third screen
+local addr4 = component.get("8d86")  -- the address of the fourth screen
  
 -- Checking System Requirements are Met --------------------------------------------
 if gpu.maxResolution() < 80 then
@@ -188,6 +192,7 @@ end)
 local ringName = rings.getName()
 if ringName == "NOT_IN_GRID" then error("Transport Rings Missing Address and Name", 0) end
 if ringName == "" then ringName = tostring("Ring Platform "..rings.getAddress()) end
+gpu.bind(addr1, false)
 gpu.setResolution(36,18)
 gpu.setDepth(4)
 term.clear()
@@ -197,7 +202,41 @@ gpu.setBackground(0x4B4B4B)
 gpu.fill(1,1,36,3," ")
 gpu.set(19-math.ceil(unicode.len(ringName)/2), 2, ringName)
 gpu.setBackground(0x000000)
- 
+
+gpu.bind(addr2, false)
+gpu.setResolution(36,18)
+gpu.setDepth(4)
+term.clear()
+screen.setTouchModeInverted(true)
+AvailableRings = rings.getAvailableRings()
+gpu.setBackground(0x4B4B4B)
+gpu.fill(1,1,36,3," ")
+gpu.set(19-math.ceil(unicode.len(ringName)/2), 2, ringName)
+gpu.setBackground(0x000000)
+
+gpu.bind(addr3, false)
+gpu.setResolution(36,18)
+gpu.setDepth(4)
+term.clear()
+screen.setTouchModeInverted(true)
+AvailableRings = rings.getAvailableRings()
+gpu.setBackground(0x4B4B4B)
+gpu.fill(1,1,36,3," ")
+gpu.set(19-math.ceil(unicode.len(ringName)/2), 2, ringName)
+gpu.setBackground(0x000000)
+
+gpu.bind(addr4, false)
+gpu.setResolution(36,18)
+gpu.setDepth(4)
+term.clear()
+screen.setTouchModeInverted(true)
+AvailableRings = rings.getAvailableRings()
+gpu.setBackground(0x4B4B4B)
+gpu.fill(1,1,36,3," ")
+gpu.set(19-math.ceil(unicode.len(ringName)/2), 2, ringName)
+gpu.setBackground(0x000000)
+gpu.bind(addr1, false)
+
 local function updateButtons()
   local buttonCount = 1
   for k,v in pairs(AvailableRings) do
@@ -225,7 +264,13 @@ local function updateButtons()
     v:display()
   end
 end
- 
+gpu.bind(addr1, false)
+updateButtons()
+gpu.bind(addr2, false)
+updateButtons()
+gpu.bind(addr3, false)
+updateButtons()
+gpu.bind(addr4, false)
 updateButtons()
  
 while MainLoop do
@@ -237,6 +282,22 @@ end
 for k,v in pairs(Events) do
   event.cancel(v)
 end
+gpu.bind(addr1, false)
+screen.setTouchModeInverted(false)
+gpu.setResolution(table.unpack(OriginalResolution))
+gpu.setDepth(OrignalColorDepth)
+term.clear()
+gpu.bind(addr2, false)
+screen.setTouchModeInverted(false)
+gpu.setResolution(table.unpack(OriginalResolution))
+gpu.setDepth(OrignalColorDepth)
+term.clear()
+gpu.bind(addr3, false)
+screen.setTouchModeInverted(false)
+gpu.setResolution(table.unpack(OriginalResolution))
+gpu.setDepth(OrignalColorDepth)
+term.clear()
+gpu.bind(addr4, false)
 screen.setTouchModeInverted(false)
 gpu.setResolution(table.unpack(OriginalResolution))
 gpu.setDepth(OrignalColorDepth)
