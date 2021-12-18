@@ -274,7 +274,14 @@ gpu.bind(addr4, false)
 updateButtons()
  
 while MainLoop do
-  os.sleep(0.05)
+  gpu.bind(addr1, false)
+  os.sleep(0.01)
+ gpu.bind(addr2, false)
+  os.sleep(0.01)
+ gpu.bind(addr3, false)
+  os.sleep(0.01)
+ gpu.bind(addr4, false)
+  os.sleep(0.01)
 end
 -- End Main Procedures -------------------------------------------------------------
  
