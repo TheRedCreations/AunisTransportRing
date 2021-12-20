@@ -239,7 +239,8 @@ gpu.setBackground(0x000000)
 gpu.bind(screen1, false)
 
 local function updateButtons()
-  local buttonCount = 1
+ gpu.bind(screen1, false) 
+ local buttonCount = 1
   for k,v in pairs(AvailableRings) do
     if v == "" then v = "Ring Platform "..tostring(k) end
     DestinationButtons[buttonCount] = Button.new(1, (buttonCount-1)*3+4, 36, 0, v, function()
@@ -247,51 +248,80 @@ local function updateButtons()
       if result ~= "OK" then
         computer.beep()
         local msgString = resultMessages[result]
-     
-        gpu.bind(screen1, false)
         gpu.setBackground(0xFF0000)
         gpu.fill(1,1,36,3," ")
         gpu.set(19-math.ceil(unicode.len(msgString)/2), 2, msgString)
         gpu.setBackground(0x000000)
-     
-        gpu.bind(screen2, false)
-        gpu.setBackground(0xFF0000)
-        gpu.fill(1,1,36,3," ")
-        gpu.set(19-math.ceil(unicode.len(msgString)/2), 2, msgString)
-        gpu.setBackground(0x000000)
-     
-        gpu.bind(screen3, false)
-        gpu.setBackground(0xFF0000)
-        gpu.fill(1,1,36,3," ")
-        gpu.set(19-math.ceil(unicode.len(msgString)/2), 2, msgString)
-        gpu.setBackground(0x000000)
-     
-        gpu.bind(screen4, false)
-        gpu.setBackground(0xFF0000)
-        gpu.fill(1,1,36,3," ")
-        gpu.set(19-math.ceil(unicode.len(msgString)/2), 2, msgString)
-        gpu.setBackground(0x000000)
-     
         os.sleep(3)
-        gpu.bind(screen1, false)
         gpu.setBackground(0x4B4B4B)
         gpu.fill(1,1,36,3," ")
         gpu.set(19-math.ceil(unicode.len(ringName)/2), 2, ringName)
         gpu.setBackground(0x000000)
-     
-        gpu.bind(screen2, false)
+      end
+    end)
+    buttonCount = buttonCount + 1
+  end
+ 
+ gpu.bind(screen2, false) 
+ local buttonCount = 1
+  for k,v in pairs(AvailableRings) do
+    if v == "" then v = "Ring Platform "..tostring(k) end
+    DestinationButtons[buttonCount] = Button.new(1, (buttonCount-1)*3+4, 36, 0, v, function()
+      local result = rings.attemptTransportTo(k)
+      if result ~= "OK" then
+        computer.beep()
+        local msgString = resultMessages[result]
+        gpu.setBackground(0xFF0000)
+        gpu.fill(1,1,36,3," ")
+        gpu.set(19-math.ceil(unicode.len(msgString)/2), 2, msgString)
+        gpu.setBackground(0x000000)
+        os.sleep(3)
         gpu.setBackground(0x4B4B4B)
         gpu.fill(1,1,36,3," ")
         gpu.set(19-math.ceil(unicode.len(ringName)/2), 2, ringName)
         gpu.setBackground(0x000000)
-     
-        gpu.bind(screen3, false)
+      end
+    end)
+    buttonCount = buttonCount + 1
+  end
+ 
+ gpu.bind(screen3, false) 
+ local buttonCount = 1
+  for k,v in pairs(AvailableRings) do
+    if v == "" then v = "Ring Platform "..tostring(k) end
+    DestinationButtons[buttonCount] = Button.new(1, (buttonCount-1)*3+4, 36, 0, v, function()
+      local result = rings.attemptTransportTo(k)
+      if result ~= "OK" then
+        computer.beep()
+        local msgString = resultMessages[result]
+        gpu.setBackground(0xFF0000)
+        gpu.fill(1,1,36,3," ")
+        gpu.set(19-math.ceil(unicode.len(msgString)/2), 2, msgString)
+        gpu.setBackground(0x000000)
+        os.sleep(3)
         gpu.setBackground(0x4B4B4B)
         gpu.fill(1,1,36,3," ")
         gpu.set(19-math.ceil(unicode.len(ringName)/2), 2, ringName)
         gpu.setBackground(0x000000)
-     
-        gpu.bind(screen4, false)
+      end
+    end)
+    buttonCount = buttonCount + 1
+  end
+ 
+ gpu.bind(screen4, false) 
+ local buttonCount = 1
+  for k,v in pairs(AvailableRings) do
+    if v == "" then v = "Ring Platform "..tostring(k) end
+    DestinationButtons[buttonCount] = Button.new(1, (buttonCount-1)*3+4, 36, 0, v, function()
+      local result = rings.attemptTransportTo(k)
+      if result ~= "OK" then
+        computer.beep()
+        local msgString = resultMessages[result]
+        gpu.setBackground(0xFF0000)
+        gpu.fill(1,1,36,3," ")
+        gpu.set(19-math.ceil(unicode.len(msgString)/2), 2, msgString)
+        gpu.setBackground(0x000000)
+        os.sleep(3)
         gpu.setBackground(0x4B4B4B)
         gpu.fill(1,1,36,3," ")
         gpu.set(19-math.ceil(unicode.len(ringName)/2), 2, ringName)
@@ -302,6 +332,13 @@ local function updateButtons()
   end
  
   for i,v in ipairs(DestinationButtons) do
+    gpu.bind(screen1, false) 
+    v:display()
+    gpu.bind(screen2, false) 
+    v:display()
+    gpu.bind(screen3, false) 
+    v:display()
+    gpu.bind(screen4, false) 
     v:display()
   end
 end
