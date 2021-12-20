@@ -247,11 +247,51 @@ local function updateButtons()
       if result ~= "OK" then
         computer.beep()
         local msgString = resultMessages[result]
+     
+        gpu.bind(screen1, false)
         gpu.setBackground(0xFF0000)
         gpu.fill(1,1,36,3," ")
         gpu.set(19-math.ceil(unicode.len(msgString)/2), 2, msgString)
         gpu.setBackground(0x000000)
+     
+        gpu.bind(screen2, false)
+        gpu.setBackground(0xFF0000)
+        gpu.fill(1,1,36,3," ")
+        gpu.set(19-math.ceil(unicode.len(msgString)/2), 2, msgString)
+        gpu.setBackground(0x000000)
+     
+        gpu.bind(screen3, false)
+        gpu.setBackground(0xFF0000)
+        gpu.fill(1,1,36,3," ")
+        gpu.set(19-math.ceil(unicode.len(msgString)/2), 2, msgString)
+        gpu.setBackground(0x000000)
+     
+        gpu.bind(screen4, false)
+        gpu.setBackground(0xFF0000)
+        gpu.fill(1,1,36,3," ")
+        gpu.set(19-math.ceil(unicode.len(msgString)/2), 2, msgString)
+        gpu.setBackground(0x000000)
+     
         os.sleep(3)
+        gpu.bind(screen1, false)
+        gpu.setBackground(0x4B4B4B)
+        gpu.fill(1,1,36,3," ")
+        gpu.set(19-math.ceil(unicode.len(ringName)/2), 2, ringName)
+        gpu.setBackground(0x000000)
+     
+        gpu.bind(screen2, false)
+        gpu.setBackground(0x4B4B4B)
+        gpu.fill(1,1,36,3," ")
+        gpu.set(19-math.ceil(unicode.len(ringName)/2), 2, ringName)
+        gpu.setBackground(0x000000)
+     
+        gpu.bind(screen3, false)
+        gpu.setBackground(0x4B4B4B)
+        gpu.fill(1,1,36,3," ")
+        gpu.set(19-math.ceil(unicode.len(ringName)/2), 2, ringName)
+        gpu.setBackground(0x000000)
+     
+        gpu.bind(screen4, false)
         gpu.setBackground(0x4B4B4B)
         gpu.fill(1,1,36,3," ")
         gpu.set(19-math.ceil(unicode.len(ringName)/2), 2, ringName)
