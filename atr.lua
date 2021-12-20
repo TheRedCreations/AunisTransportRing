@@ -18,10 +18,10 @@ local event = require("event")
 local term = require("term")
 local computer = require("computer")
 local gpu = component.gpu
-local screen1 = component.get("b35e")  -- the address of the first screen
-local screen2 = component.get("677c")  -- the address of the second screen
-local screen3 = component.get("fc6b")  -- the address of the third screen
-local screen4 = component.get("8d86")  -- the address of the fourth screen
+local screen1 = component.get("c572")  -- the address of the first screen
+local screen2 = component.get("bdb2")  -- the address of the second screen
+local screen3 = component.get("a82c")  -- the address of the third screen
+local screen4 = component.get("ffb3")  -- the address of the fourth screen
  
 -- Checking System Requirements are Met --------------------------------------------
 if gpu.maxResolution() < 80 then
