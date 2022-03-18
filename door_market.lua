@@ -14,7 +14,7 @@ local pin = "0000"
 local keypadInput = ""
  
 -- set this to true if you want to run the script as daemon
-local runScriptInBackground = false
+local runScriptInBackground = true
  
 function updateDisplay()
     local displayString = ""
