@@ -16,15 +16,6 @@ color = 2
 customButtons = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "<", "0", "ok"} 
 customButtonColor = {color,color,color,color,color,color,color,color,color,color,color,color} 
 keypad1.setKey(customButtons, customButtonColor)
-door1.close()
-door2.close()
-door3.close()
-door4.close()
-door5.close()
-door6.close()
-door7.close()
-door8.close()
-door9.close()
  
 local pin1 = "0001"
 local pin2 = "0002"
@@ -185,13 +176,4 @@ if not runScriptInBackground then
     color2 = 0
     customButtonColor2 = {color2,color2,color2,color2,color2,color2,color2,color2,color2,color2,color2,color2} 
     keypad1.setKey(customButtons, customButtonColor2)
-    door1.open()
-    door2.open()
-    door3.open()
-    door4.open()
-    door5.open()
-    door6.open()
-    door7.open()
-    door8.open()
-    door9.open()
 end
