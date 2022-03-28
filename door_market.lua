@@ -9,7 +9,7 @@ door5 = component.proxy("276747ca-8fa9-4b81-9c5f-1f5402b5c79f")
 door6 = component.proxy("4fcf810f-c3cc-468a-90ff-b40a022f5f01")
 door7 = component.proxy("e01695bc-c6ad-4a5b-915b-14d4a9e37275")
 door8 = component.proxy("ad2f93ed-14f4-4599-81a9-58444d5ac931")
-door9 = component.proxy("40010559-859a-430d-9c7c-ad7ed939f668")
+door9 = component.proxy("102e48df-90b5-4423-ab98-33b657b71e12")
 keypad1 = component.proxy("3187d470-afd7-4f85-825f-e8651192ef2c")
 color = 2
  
