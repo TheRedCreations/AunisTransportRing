@@ -2,12 +2,9 @@ component = require("component")
 event = require("event")
 os = require("os")
 door = component.os_rolldoorcontroller
-alarm = component.os_alarm
 
 local gate_iter = component.list('os_keypad')
 local keypad1, keypad2 = component.proxy(gate_iter()), component.proxy(gate_iter())
-alarm.setAlarm("area51_alert")
-alarm.setRange(0.5)
 color = 2
  
 customButtons = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "<", "0", "ok"} 
@@ -15,8 +12,9 @@ customButtonColor = {color,color,color,color,color,color,color,color,color,color
 keypad1.setKey(customButtons, customButtonColor)
 keypad2.setKey(customButtons, customButtonColor)
  
-local pin = "0000"
-local tpin = "0001"
+local pin = "0000" --pin for open the Rolldoor. It autocloses after 5 Sec
+local tpin = "0001" --pin for toggleing the Rolldoor
+local time = 5 --time the Rolldoor remains open
 local keypadInput = ""
  
 -- set this to true if you want to run the script as daemon
@@ -37,7 +35,7 @@ function checkPin()
         keypad1.setDisplay("granted", 2)
         keypad2.setDisplay("granted", 2)
         door.open()
-        os.sleep(5)
+        os.sleep(time)
         keypad1.setDisplay("CLOSING", 4)
         keypad2.setDisplay("CLOSING", 4)
         door.close()
@@ -50,9 +48,7 @@ function checkPin()
         else
         keypad1.setDisplay("denied", 4)
         keypad2.setDisplay("denied", 4)
-        alarm.activate()
         os.sleep(5)
-        alarm.deactivate()
     end
     end    
     keypadInput = ""
