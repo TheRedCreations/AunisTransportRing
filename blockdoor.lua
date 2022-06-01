@@ -7,7 +7,7 @@ mag2=component.proxy("c8c22e72-ffa8-42dc-ac96-ad66f3ad2337")
 mag3=component.proxy("c08082cf-6b40-4a79-aa0b-93f89b62194d")
 mag4=component.proxy("e56c6150-af54-4f4d-b5d7-0114aee6ac6e")
 door1=component.proxy("8e9491a1-c05a-4c1a-8559-c3513bf06b49")
-door2=component.proxy("60b4271b-f549-46fd-b811-ec51ad41cb73")
+door2=component.proxy("2a28725f-e461-4511-a190-5e98aa0b8857")
 door3=component.proxy("cfc14af6-82e3-4caf-b917-49d2558995e7")
 door4=component.proxy("81484f05-e354-472b-bf2b-439c81baeaeb")
 
